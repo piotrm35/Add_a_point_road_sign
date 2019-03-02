@@ -11,11 +11,9 @@ class Setup:
     DB_FIELD_NAMES_MAPPING_DICT = {
         'ROAD_SIGN_TYPE': 'type',
         'ANGLE': 'angle',
-##        'WIDTH': 'size',
-##        'HEIGHT': 'size2',
         'WIDTH': 'width',
         'HEIGHT': 'height',
         'START_DATE': 'start',
         'COMMENTS': 'comments'
         }
-    MANUAL_FILE_NAME = 'manual_PL_0_1_h.pdf'
+    MANUAL_FILE_NAME = 'manual_EN_0_1_k.pdf'
