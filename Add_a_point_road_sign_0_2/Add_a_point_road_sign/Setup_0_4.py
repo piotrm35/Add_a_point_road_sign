@@ -4,7 +4,7 @@ class Setup:
     
     WIDTH = 7
     HEIGHT = 7
-    START_DATE = '2019-02-14T11:19'
+    START_DATE = '2019-02-11T11:19'
     COMMENTS = ''
 
     COMMENTS_MAX_LENGTH = 100
@@ -16,4 +16,4 @@ class Setup:
         'START_DATE': 'start',
         'COMMENTS': 'comments'
         }
-    MANUAL_FILE_NAME = 'manual_EN_0_1_k.pdf'
+    MANUAL_FILE_NAME = 'APRS_manual_EN.pdf'
