@@ -18,12 +18,11 @@ author=Piotr Michałowski, Olsztyn, woj. W-M, Poland
 
 email=piotrm35@hotmail.com
 
+homepage=https://github.com/piotrm35/Add_a_point_road_sign
 repository=https://github.com/piotrm35/Add_a_point_road_sign
-
 tracker=https://github.com/piotrm35/Add_a_point_road_sign/issues
 
 experimental=True
-
 deprecated=False
 
 tags=point, road, sign, traffic, project, design
