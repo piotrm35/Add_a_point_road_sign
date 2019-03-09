@@ -1,4 +1,4 @@
-Add a point road sign
+Add a point road sign (APRS)
 
 # Purpose
 QGIS plugin that adds a point road sign to a traffic management design.
