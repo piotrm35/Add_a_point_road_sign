@@ -21,7 +21,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../../../../../../../../../Documents/tmp/QGIS_3/Add_a_point_road_sign_0_1/images/Add_a_point_road_sign_ICON.png</normaloff>../../../../../../../../../Documents/tmp/QGIS_3/Add_a_point_road_sign_0_1/images/Add_a_point_road_sign_ICON.png</iconset>
+    <normaloff>../img/Add_a_point_road_sign_ICON.png</normaloff>../img/Add_a_point_road_sign_ICON.png</iconset>
   </property>
  </widget>
  <resources/>
