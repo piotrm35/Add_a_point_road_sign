@@ -6,7 +6,7 @@ description=Plugin that adds a point road sign to a traffic management design.
 
 about=Please read the manual to catch details (press [manual] button of the plugin or visit its repository).
  
-version=0.2.1
+version=0.2.2
 
 qgisMinimumVersion=3.0
 

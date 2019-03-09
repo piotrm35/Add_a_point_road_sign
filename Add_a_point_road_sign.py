@@ -2,7 +2,7 @@
 
 SCRIPT_TITLE = 'Add a point road sign'
 SCRIPT_NAME = 'Add_a_point_road_sign'
-SCRIPT_VERSION = '0.2.1'
+SCRIPT_VERSION = '0.2.2'
 GENERAL_INFO = u"""
 author: Piotr Michałowski, Olsztyn, woj. W-M, Poland
 piotrm35@hotmail.com
