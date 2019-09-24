@@ -1,5 +1,23 @@
 # -*- coding: utf-8 -*-
 
+"""
+/***************************************************************************
+  Mouse_point_tool.py
+
+  A mouse point tool.
+  --------------------------------------
+  Date : 21.01.2019
+  Copyright: (C) 2019 by Piotr Michałowski
+  Email: piotrm35@hotmail.com
+/***************************************************************************
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as published
+ * by the Free Software Foundation.
+ *
+ ***************************************************************************/
+"""
+
 SCRIPT_TITLE = 'Add a point road sign'
 GENERAL_INFO = u"""
 author: Piotr Michałowski, Olsztyn, woj. W-M, Poland
@@ -8,7 +26,7 @@ license: GPL v. 2
 work begin: 21.01.2019
 """
 
-# this file version: 0.3
+# this file version: 0.4
 
 from qgis.core import *
 from qgis.gui import *
@@ -88,6 +106,7 @@ class Mouse_point_tool(QgsMapTool):
                         self._set_attribute_if_exist(feat, self.parent.setup.DB_FIELD_NAMES_MAPPING_DICT['HEIGHT'], self.parent.pt_height)
                         self._set_attribute_if_exist(feat, self.parent.setup.DB_FIELD_NAMES_MAPPING_DICT['START_DATE'], self.parent.start_date)
                         self._set_attribute_if_exist(feat, self.parent.setup.DB_FIELD_NAMES_MAPPING_DICT['COMMENTS'], self.parent.comments)
+                        self._set_attribute_if_exist(feat, self.parent.setup.DB_FIELD_NAMES_MAPPING_DICT['STREET_NAME'], self.parent.street_name)
                         feat.setGeometry(QgsGeometry.fromPointXY(qgs_point_xy))
                         (res, outFeats) = layer.dataProvider().addFeatures([feat])
                         if self.parent.iface.mapCanvas().isCachingEnabled():

@@ -1,8 +1,26 @@
 # -*- coding: utf-8 -*-
 
+"""
+/***************************************************************************
+  Add_a_point_road_sign.py
+
+  QGIS plugin that adds a point road sign to a traffic management design.
+  --------------------------------------
+  Date : 21.01.2019
+  Copyright: (C) 2019 by Piotr Michałowski
+  Email: piotrm35@hotmail.com
+/***************************************************************************
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as published
+ * by the Free Software Foundation.
+ *
+ ***************************************************************************/
+"""
+
 SCRIPT_TITLE = 'Add a point road sign'
 SCRIPT_NAME = 'Add_a_point_road_sign'
-SCRIPT_VERSION = '0.2.2'
+SCRIPT_VERSION = '1.0.0'
 GENERAL_INFO = u"""
 author: Piotr Michałowski, Olsztyn, woj. W-M, Poland
 piotrm35@hotmail.com
@@ -41,13 +59,14 @@ class Add_a_point_road_sign(QtWidgets.QMainWindow):
         self.pt_height = None
         self.angle = None
         self.comments = None
+        self.street_name = None
         self.selected_type = None
         self.selected_type_path = None
         self.type_groups_folder = None
         self.type_folders = None
         self.type_preview_Dialog = None
         self.type_groups_comboBox_currentIndexChanged_LOCK = True
-        self.memory_list = [[None] * 5, [None] * 5, [None] * 5]
+        self.memory_list = [[None] * 6, [None] * 6, [None] * 6]
         self.memory_X_pushButtons_list = None
         self.set_angle_mode = False
         self.svg_extension_list = ['.SVG']
@@ -92,6 +111,7 @@ class Add_a_point_road_sign(QtWidgets.QMainWindow):
         self.Angle_lineEdit.textChanged.connect(self.angle_lineEdit_textChanged)
         self.Start_dateTimeEdit.dateTimeChanged.connect(self.start_dateTimeEdit_dateTimeChanged)
         self.Comments_textEdit.textChanged.connect(self.comments_textEdit_textChanged)
+        self.Street_name_textEdit.textChanged.connect(self.street_name_textEdit_textChanged)
         self.Type_groups_comboBox.currentIndexChanged.connect(self.type_groups_comboBox_currentIndexChanged)
         self.Type_preview_pushButton.clicked.connect(self.type_preview_pushButton_clicked)
         self.Type_filter_pushButton.clicked.connect(self.type_filter_pushButton_clicked)
@@ -119,6 +139,7 @@ class Add_a_point_road_sign(QtWidgets.QMainWindow):
         self.Angle_lineEdit.textChanged.disconnect(self.angle_lineEdit_textChanged)
         self.Start_dateTimeEdit.dateTimeChanged.disconnect(self.start_dateTimeEdit_dateTimeChanged)
         self.Comments_textEdit.textChanged.disconnect(self.comments_textEdit_textChanged)
+        self.Street_name_textEdit.textChanged.disconnect(self.street_name_textEdit_textChanged)
         self.Type_groups_comboBox.currentIndexChanged.disconnect(self.type_groups_comboBox_currentIndexChanged)
         self.Type_preview_pushButton.clicked.disconnect(self.type_preview_pushButton_clicked)
         self.Type_filter_pushButton.clicked.disconnect(self.type_filter_pushButton_clicked)
@@ -322,8 +343,19 @@ class Add_a_point_road_sign(QtWidgets.QMainWindow):
         else:
             self.Comments_textEdit.setText(self.comments)
             self.Comments_textEdit.moveCursor(QTextCursor.End)
-            print("Comments' len = " + str(len_tx) + " > " + str(Setup.COMMENTS_MAX_LENGTH))
+            print("comments' len = " + str(len_tx) + " > " + str(Setup.COMMENTS_MAX_LENGTH))
 
+
+    def street_name_textEdit_textChanged(self):
+        tx = self.Street_name_textEdit.toPlainText()
+        len_tx = len(tx)
+        if len_tx <= Setup.STREET_NAME_MAX_LENGTH:
+            self.street_name = tx.strip()
+        else:
+            self.Street_name_textEdit.setText(self.street_name)
+            self.Street_name_textEdit.moveCursor(QTextCursor.End)
+            print("street names' len = " + str(len_tx) + " > " + str(Setup.STREET_NAME_MAX_LENGTH))
+            
         
     def about_pushButton_clicked(self):
         QtWidgets.QMessageBox.information(self, SCRIPT_TITLE, SCRIPT_TITLE + ' v. ' + SCRIPT_VERSION + '\n' + GENERAL_INFO + "\n( QGIS v. " + Qgis.QGIS_VERSION + " )")
@@ -352,6 +384,7 @@ class Add_a_point_road_sign(QtWidgets.QMainWindow):
         self.pt_height = str(Setup.HEIGHT).strip()
         self.angle = None
         self.comments = Setup.COMMENTS.strip()
+        self.street_name = Setup.STREET_NAME.strip()
         self._show_data()
 
 
@@ -386,6 +419,7 @@ class Add_a_point_road_sign(QtWidgets.QMainWindow):
             self.pt_height = self.memory_list[idx][2]
             self.angle = self.memory_list[idx][3]
             self.comments = self.memory_list[idx][4]
+            self.street_name = self.memory_list[idx][5]
             self._show_data()
         else:
             self.memory_list[idx][0] = self.start_date
@@ -393,6 +427,7 @@ class Add_a_point_road_sign(QtWidgets.QMainWindow):
             self.memory_list[idx][2] = self.pt_height
             self.memory_list[idx][3] = self.angle
             self.memory_list[idx][4] = self.comments
+            self.memory_list[idx][5] = self.street_name
             self.memory_X_pushButtons_list[idx].setText('M' + str(idx + 1))
         
 
@@ -418,6 +453,10 @@ class Add_a_point_road_sign(QtWidgets.QMainWindow):
             self.Comments_textEdit.setText(self.comments)
         else:
             self.Comments_textEdit.setText('')
+        if self.street_name:
+            self.Street_name_textEdit.setText(self.street_name)
+        else:
+            self.Street_name_textEdit.setText('')
 
 
     def set_angle_pushButton_clicked(self):
@@ -455,6 +494,10 @@ class Add_a_point_road_sign(QtWidgets.QMainWindow):
                     pass
                 try:
                     self.comments = selection[0][self.setup.DB_FIELD_NAMES_MAPPING_DICT['COMMENTS']]
+                except:
+                    pass
+                try:
+                    self.street_name = selection[0][self.setup.DB_FIELD_NAMES_MAPPING_DICT['STREET_NAME']]
                 except:
                     pass
                 self._show_data()
@@ -496,9 +539,8 @@ class Add_a_point_road_sign(QtWidgets.QMainWindow):
                 for feature in features:
                     n += 1
                     geom = feature.geometry()
-                    if geom and geom.type() == QgsWkbTypes.PointGeometry:
-                        if QgsWkbTypes.isSingleType(geom.wkbType()):
-                            res = True
+                    if geom and (geom.type() == QgsWkbTypes.PointGeometry or geom.type() == QgsWkbTypes.MultiPointGeometry): 
+                        res = True
                     break
                 if n == 0:
                     res = True

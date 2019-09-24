@@ -5,6 +5,7 @@ version 3.6.0).**
 Discussion of the various elements of the plugin interface (from the
 upper left corner):
 
+|image0|
 
 1.  view of the selected road sign (type);
 2.  the [set type groups folder] button is used to set the parent folder
@@ -54,8 +55,10 @@ upper left corner):
     Setup.py file of this plug-in);
 20. a set of six buttons for memorizing settings during operation,
     switching between them, and for deleting them;
-21. the field "comments" is used to enter comments about the inserted
-    road sign.
+21. the "comments" field is used to enter comments about the inserted
+    road sign;
+22. the "street" field is used to enter the name of the street to which
+    the road sign is assigned.
 
 Discussing the Setup.py file of this plug-in:
 
@@ -73,6 +76,8 @@ COMMENTS = ''
 
 COMMENTS_MAX_LENGTH = 100
 
+STREET_NAME_MAX_LENGTH = 100
+
 DB_FIELD_NAMES_MAPPING_DICT = {
 
 'ROAD_SIGN_TYPE': 'type',
@@ -85,7 +90,9 @@ DB_FIELD_NAMES_MAPPING_DICT = {
 
 'START_DATE': 'start',
 
-'COMMENTS': 'comments'
+'COMMENTS': 'comments',
+
+'STREET_NAME': 'street'
 
 }
 
@@ -100,7 +107,8 @@ MANUAL_FILE_NAME = 'APRS_manual_EN .pdf'
 3. COMMENTS_MAX_LENGTH setting specifies the maximum number of
    characters from which a comment may be made (it should match the
    setting of the road sign layer for this field). The "comments" field
-   of this plugin will not allow you to enter a longer comment;
+   of this plugin will not allow you to enter a longer comment
+   (STREET_NAME_MAX_LENGTH similarly for the "street" field);
 4. setting DB_FIELD_NAMES_MAPPING_DICT is a dictionary containing data
    mapping from the plugin to the layers with road signs (eg, pair:
    'START_DATE': 'start' means that the date from the 'start date' field
@@ -145,4 +153,8 @@ Additives:
 
 --------------------------------------------------------------------------------------------------------------------------------------
 
-LMB - left mouse button                              manual version: 0.2
+LMB - left mouse buttonmanual version: 0.4
+
+.. |image0| image:: Pictures/10000000000002C40000030311146E0460D0FDD1.png
+   :width: 18.733cm
+   :height: 20.399cm

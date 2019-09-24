@@ -1,5 +1,23 @@
 # -*- coding: utf-8 -*-
 
+"""
+/***************************************************************************
+  Type_preview_Dialog.py
+
+  Type preview Dialog.
+  --------------------------------------
+  Date : 21.01.2019
+  Copyright: (C) 2019 by Piotr Michałowski
+  Email: piotrm35@hotmail.com
+/***************************************************************************
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as published
+ * by the Free Software Foundation.
+ *
+ ***************************************************************************/
+"""
+
 SCRIPT_TITLE = 'Add a point road sign'
 GENERAL_INFO = u"""
 author: Piotr Michałowski, Olsztyn, woj. W-M, Poland
