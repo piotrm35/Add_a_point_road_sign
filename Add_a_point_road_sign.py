@@ -367,7 +367,11 @@ class Add_a_point_road_sign(QtWidgets.QMainWindow):
 
 
     def type_filter_pushButton_clicked(self):
-        self._show_type_group(self.type_folders[self.Type_groups_comboBox.currentIndex()], self.Type_filter_lineEdit.text())
+        if self.type_folders:
+            tx  = self.Type_filter_lineEdit.text()
+            ci = self.Type_groups_comboBox.currentIndex()
+            if ci is not None and tx and len(tx) > 0:
+                self._show_type_group(self.type_folders[ci], tx)
 
 
     def manual_pushButton_clicked(self):
