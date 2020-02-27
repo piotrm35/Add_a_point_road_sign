@@ -20,7 +20,7 @@
 
 SCRIPT_TITLE = 'Add a point road sign'
 SCRIPT_NAME = 'Add_a_point_road_sign'
-SCRIPT_VERSION = '1.0.0'
+SCRIPT_VERSION = '1.0.1'
 GENERAL_INFO = u"""
 author: Piotr Michałowski, Olsztyn, woj. W-M, Poland
 piotrm35@hotmail.com
@@ -259,13 +259,13 @@ class Add_a_point_road_sign(QtWidgets.QMainWindow):
     
     def _raster_enabled(self):
         try:
-            ver_str = Qgis.QGIS_VERSION
-            if ver_str and len(ver_str) > 0:
-                ver_major = int(ver_str[0])
+            ver_str_list = Qgis.QGIS_VERSION.split('.')
+            if ver_str_list and len(ver_str_list) >= 2:
+                ver_major = int(ver_str_list[0])
                 if ver_major >= 4:
                     return True
                 elif ver_major == 3:
-                    ver_minor = int(ver_str[2])
+                    ver_minor = int(ver_str_list[1])
                     if ver_minor >= 6:
                         return True
         except:
